@@ -69,7 +69,8 @@ class SlangWordApp{
         do {
             clearScreen();
             System.out.println("Welcome to Slang Word List Application");
-            System.out.println("1. Search a slang word");
+            System.out.println("1. Search by slang word");
+            System.out.println("2. Search by definition");
           
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
@@ -94,7 +95,10 @@ class SlangWordApp{
                         clearScreen();
                         SearchSlangWord();
                         break;
-                    
+                    case 2:
+                        clearScreen();
+                        SearchDefinition();
+                        break;
                     default:
                         break;
                 }
@@ -106,6 +110,30 @@ class SlangWordApp{
     }
        
 
+    private void SearchDefinition() {
+        clearScreen();
+        System.out.print("Enter the definition you want to search: ");
+        BufferedReader bReader;
+        try {
+            bReader = new BufferedReader(new InputStreamReader(System.in, "utf-8"));
+            String definition = bReader.readLine();
+            SlangWordList result = slangWordList.search(definition);
+            if(result.size() == 0) {
+                System.out.println("No result found!");
+            }
+            else {
+                System.out.println("Found " + result.size() + " results:");
+                System.out.println(result);
+            }
+            System.out.println("Press Enter to continue...");
+            bReader.readLine();
+            run();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
     private void SearchSlangWord() {
         clearScreen();
         System.out.println("Search a slang word");
