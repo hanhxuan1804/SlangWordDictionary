@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -22,6 +23,7 @@ public class Main {
 
 class SlangWordApp{
     SlangWordList slangWordList = new SlangWordList();
+    LinkedHashMap<String, String> historySearch = new LinkedHashMap<String, String>();
     public void loadData(String fileName){
         File file = new File(fileName);
         try {
@@ -71,7 +73,7 @@ class SlangWordApp{
             System.out.println("Welcome to Slang Word List Application");
             System.out.println("1. Search by slang word");
             System.out.println("2. Search by definition");
-          
+            System.out.println("3. View search history");
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
             }
@@ -99,6 +101,10 @@ class SlangWordApp{
                         clearScreen();
                         SearchDefinition();
                         break;
+                    case 3:
+                        clearScreen();
+                        ViewSearchHistory();
+                        break;
                     default:
                         break;
                 }
@@ -108,8 +114,25 @@ class SlangWordApp{
         }
         } while (id<0||id>5);
     }
-       
 
+    private void ViewSearchHistory() {
+        clearScreen();
+        if(historySearch.size()==0){
+            System.out.println("No search history!");
+        }
+        else{
+            System.out.println("Search history:");
+            int i =1;
+            for(String word : historySearch.keySet()){
+                System.out.println(i +". "+ word + ": " + historySearch.get(word));
+                i++;
+            }
+        }
+        System.out.println("Press enter to continue...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        run();
+    }
     private void SearchDefinition() {
         clearScreen();
         System.out.print("Enter the definition you want to search: ");
@@ -124,6 +147,9 @@ class SlangWordApp{
             else {
                 System.out.println("Found " + result.size() + " results:");
                 System.out.println(result);
+                for(String word : result.slangWords.keySet()) {
+                   historySearch.put(word , result.slangWords.get(word));
+                }
             }
             System.out.println("Press Enter to continue...");
             bReader.readLine();
@@ -142,6 +168,7 @@ class SlangWordApp{
         String word = scanner.nextLine();
         if(slangWordList.get(word) != null) {
             System.out.println("Definition: " + slangWordList.get(word));
+            historySearch.put(word, slangWordList.get(word));
         }
         else {
             System.out.println("Not found!");
