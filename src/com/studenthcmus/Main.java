@@ -17,7 +17,7 @@ public class Main {
 	SlangWordApp app = new SlangWordApp();
     app.loadData("slang.txt");
     app.run();
-    app.saveData("backup.txt");
+    app.saveData("slang.txt");
     }
 }
 
@@ -77,6 +77,7 @@ class SlangWordApp{
             System.out.println("4. Add new slang word");
             System.out.println("5. Edit slang word");
             System.out.println("6. Delete slang word");
+            System.out.println("7. Restore backup");
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
             }
@@ -120,6 +121,14 @@ class SlangWordApp{
                         clearScreen();
                         DeleteWord();
                         break;
+                    case 7:
+                        clearScreen();
+                        RestoreBackup();
+                        break;
+                    case 0:
+                        clearScreen();
+                        System.out.println("Thank you for using Slang Word List Application!");
+                        break;
                     default:
                         break;
                 }
@@ -130,6 +139,30 @@ class SlangWordApp{
         } while (id<0||id>5);
     }
 
+    private void RestoreBackup() {
+        System.out.println("Are you sure you want to restore backup? (Y/N)");
+        BufferedReader bReader;
+        try {
+            bReader = new BufferedReader(new InputStreamReader(System.in, "utf-8"));
+            System.out.print("Enter your choice: ");
+            String choice = bReader.readLine();
+            if(choice.equals("Y")||choice.equals("y")) {
+                slangWordList.slangWords.clear();
+                loadData("slang.txt.bak");
+                System.out.println("Backup restored!");
+
+            }
+            else {
+                System.out.println("Backup not restored!");
+            }
+            System.out.println("Press any key to continue...");
+            bReader.readLine();
+            run();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
     private void DeleteWord() {
         System.out.print("Enter the word you want to delete: ");
         BufferedReader bReader;
