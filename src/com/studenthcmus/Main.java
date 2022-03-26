@@ -74,6 +74,7 @@ class SlangWordApp{
             System.out.println("1. Search by slang word");
             System.out.println("2. Search by definition");
             System.out.println("3. View search history");
+            System.out.println("4. Add new word");
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
             }
@@ -105,6 +106,10 @@ class SlangWordApp{
                         clearScreen();
                         ViewSearchHistory();
                         break;
+                    case 4:
+                        clearScreen();
+                        AddNewWord();
+                        break;
                     default:
                         break;
                 }
@@ -115,12 +120,35 @@ class SlangWordApp{
         } while (id<0||id>5);
     }
 
+    private void AddNewWord() {
+        System.out.print("Enter the slang word: ");
+        BufferedReader bReader;
+        try {
+            bReader = new BufferedReader(new InputStreamReader(System.in, "utf-8"));
+            String slangWord = bReader.readLine();
+            System.out.print("Enter the definition: ");
+            String definition = bReader.readLine();
+            if(slangWordList.add(slangWord, definition)){
+                System.out.println("Add new word successfully!");
+            }
+            else{
+                System.out.println("Add new word failed! The word is already existed!");
+            }
+            System.out.println("Press enter to continue...");
+            bReader.readLine();
+            run();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
     private void ViewSearchHistory() {
-        clearScreen();
+        
         if(historySearch.size()==0){
             System.out.println("No search history!");
         }
         else{
+            clearScreen();
             System.out.println("Search history:");
             int i =1;
             for(String word : historySearch.keySet()){
@@ -136,10 +164,8 @@ class SlangWordApp{
     private void SearchDefinition() {
         clearScreen();
         System.out.print("Enter the definition you want to search: ");
-        BufferedReader bReader;
-        try {
-            bReader = new BufferedReader(new InputStreamReader(System.in, "utf-8"));
-            String definition = bReader.readLine();
+            Scanner scanner = new Scanner(System.in);
+            String definition = scanner.nextLine();
             SlangWordList result = slangWordList.search(definition);
             if(result.size() == 0) {
                 System.out.println("No result found!");
@@ -152,13 +178,9 @@ class SlangWordApp{
                 }
             }
             System.out.println("Press Enter to continue...");
-            bReader.readLine();
+            scanner.nextLine();
             run();
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
     private void SearchSlangWord() {
         clearScreen();

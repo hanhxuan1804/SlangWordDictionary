@@ -13,13 +13,14 @@ public class SlangWordList {
         size = 0;
     }
     
-    public void add(String word, String definition) {
+    public boolean add(String word, String definition) {
         if(!slangWords.containsKey(word)) {
             slangWords.put(word, definition);
             size++;
+            return true;
         }
         else{
-            slangWords.put(word, definition);
+            return false;
         }
     }
     
