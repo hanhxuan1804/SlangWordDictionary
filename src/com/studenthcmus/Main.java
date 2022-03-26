@@ -74,7 +74,8 @@ class SlangWordApp{
             System.out.println("1. Search by slang word");
             System.out.println("2. Search by definition");
             System.out.println("3. View search history");
-            System.out.println("4. Add new word");
+            System.out.println("4. Add new slang word");
+            System.out.println("5. Edit slang word");
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
             }
@@ -110,6 +111,10 @@ class SlangWordApp{
                         clearScreen();
                         AddNewWord();
                         break;
+                    case 5:
+                        clearScreen();
+                        EditWord();
+                        break;
                     default:
                         break;
                 }
@@ -120,6 +125,25 @@ class SlangWordApp{
         } while (id<0||id>5);
     }
 
+    private void EditWord() {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Enter the word you want to edit: ");
+            String word = sc.nextLine();
+            if(slangWordList.slangWords.containsKey(word)){
+                System.out.print("Old definition: " + slangWordList.slangWords.get(word) + "\n");
+                System.out.print("Enter the new definition: ");
+                String definition = sc.nextLine();
+                slangWordList.slangWords.put(word, definition);
+                System.out.println("Edit successfully!");
+            }
+            else{
+                System.out.println("Word not found!");
+            }
+            System.out.println("Press enter to continue...");
+            sc.nextLine();
+            run();
+        }
+    }
     private void AddNewWord() {
         System.out.print("Enter the slang word: ");
         BufferedReader bReader;
@@ -208,7 +232,12 @@ class SlangWordApp{
     }
 
     public static void clearScreen() {  
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();  
+       //Clears Screen in java
+        try {
+        if (System.getProperty("os.name").contains("Windows"))
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        else
+            Runtime.getRuntime().exec("clear");
+     } catch (IOException | InterruptedException ex) {}
     }
 }

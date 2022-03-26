@@ -1,3 +1,4 @@
+`oz
 #1`Number one
 $`Dollar| money
 $_$`Has money
@@ -2725,7 +2726,7 @@ HAYD`How Are You Doing?
 HAYT`How Are You Today?
 HAYWIRE`Crazy
 HAZE`Type of marijuana
-HB`Hurry Back
+HB`Hug Back
 HBCU`Historically Black Colleges and Universities
 HBD`Happy Birthday
 HBK`Heart Break Kid
@@ -2786,7 +2787,7 @@ HGI`How Goes It?
 HGL`Happy Go Lucky
 HGTV`Home and Garden Television
 HGV`Heavy Goods Vehicle
-HH`Holding Hands
+HH`Ha-Ha
 HHIS`Hanging Head In Shame
 HHOJ`Ha-Ha, Only Joking
 HHOK`Ha-Ha, Only Kidding
@@ -4981,7 +4982,7 @@ OTS`On The Side
 OTT`Over The Top
 OTTH`On The Third Hand
 OTTOMH`Off The Top Of My Head
-OTW`On The Whole
+OTW`On The Way
 OTY`Over To You
 OTZ`ORZ
 OU`Open University
@@ -5013,6 +5014,7 @@ OYG`Oh Your God
 OYO`On Your Own
 OZ`Australia| Ounce
 O_O`Confused
+Oz`run  
 P`Penny| pence
 P!ATD`Panic! At The Disco (band)
 P&C`Point and Click
