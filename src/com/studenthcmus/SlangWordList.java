@@ -60,6 +60,17 @@ public class SlangWordList {
         return slangWords.keySet().iterator().next();
     }
 
+    public String randomDefinition() {
+        int randomIndex = (int) (Math.random() * size);
+        int i = 0;
+        for (String word : slangWords.keySet()) {
+            if (i == randomIndex) {
+                return slangWords.get(word);
+            }
+            i++;
+        }
+        return slangWords.values().iterator().next();
+    }
     public String toString() {
         String result = "";
         for (String word : slangWords.keySet()) {

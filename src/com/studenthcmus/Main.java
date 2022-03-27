@@ -131,7 +131,10 @@ class SlangWordApp{
                         clearScreen();
                         RandomWord();
                         break;
-                
+                    case 9:
+                        clearScreen();
+                        GuessDefinition();
+                        break;
                     case 0:
                         clearScreen();
                         System.out.println("Thank you for using Slang Word List Application!");
@@ -146,6 +149,28 @@ class SlangWordApp{
         } while (id<0||id>5);
     }
 
+    private void GuessDefinition() {
+        String word = slangWordList.randomWord();
+        String[] difination= {"","","",""};
+        for(int i=0;i<4;i++){
+            difination[i]=slangWordList.randomDefinition();
+        }
+        int randomIndex = (int) (Math.random() * 4);
+        difination[randomIndex] = slangWordList.getDefinition(word);
+        RandomGame game = new RandomGame(word, difination, randomIndex);
+        System.out.println("Guess the definition of: "+word);
+        game.run();
+        System.out.println("Press enter to continue...");
+        BufferedReader bReader;
+        try {
+            bReader = new BufferedReader(new InputStreamReader(System.in, "utf-8"));
+            bReader.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        run();
+    }
     private void RandomWord() {
         String word = slangWordList.randomWord();
         System.out.println("Slang word: " + word +", definition: " + slangWordList.getDefinition(word));

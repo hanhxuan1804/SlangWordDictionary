@@ -1,16 +1,18 @@
 package com.studenthcmus;
 
+import java.io.BufferedReader;
+
 public class RandomGame {
     public String question;
     public String[] answers;
     public int userAnswer;
-    public String correctAnswer;
+    public int correctAnswer;
 
-    public RandomGame(String question, String[] answers) {
+    public RandomGame(String question, String[] answers, int correctAnswer) {
         this.question = question;
         this.answers = answers;
-        this.userAnswer = -1;
-        this.correctAnswer = "";
+        this.userAnswer = 0;
+        this.correctAnswer = correctAnswer;
     }
 
 
@@ -30,11 +32,11 @@ public class RandomGame {
         this.answers = answers;
     }
 
-    public String getCorrectAnswer() {
+    public int getCorrectAnswer() {
         return this.correctAnswer;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
+    public void setCorrectAnswer(int correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
@@ -48,11 +50,53 @@ public class RandomGame {
     public void printResult() {
         if (this.userAnswer == -1) {
             System.out.println("You haven't answered yet!");
-        } else if (this.answers[this.userAnswer] == this.correctAnswer) {
+        } else if (this.userAnswer == this.correctAnswer) {
             System.out.println("Correct Answer!");
         } else {
             System.out.println("Wrong Answer!");
         }
     }
-    
+    public void display() {
+        for (int i = 1; i <= this.answers.length; i++) {
+            System.out.println(i + ": " + this.answers[i-1]);
+        }
+    }
+
+    public void run() {
+        display();
+        BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(System.in));
+        try {
+            do {
+                if(this.userAnswer <0 || this.userAnswer >= this.answers.length) {
+                    
+                    System.out.println("Please enter a valid answer!");
+                }
+                System.out.print("Enter your answer: ");
+                String line = reader.readLine();
+                if(isNumeric(line)) {
+                    this.userAnswer = Integer.parseInt(line)-1 ;
+                }
+                else {
+                   this.userAnswer=-1;
+                }
+
+            } while (this.userAnswer < 0 || this.userAnswer >= this.answers.length);
+            
+        } catch (Exception e) {
+           
+        }
+        printResult();
+        System.out.println("The correct answer is: " + this.answers[this.correctAnswer]);
+    }
+
+
+    private boolean isNumeric(String readLine) {
+        try {
+            Integer.parseInt(readLine);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
