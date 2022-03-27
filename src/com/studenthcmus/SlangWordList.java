@@ -40,11 +40,24 @@ public class SlangWordList {
     public SlangWordList search(String definition) {
         SlangWordList result = new SlangWordList();
         for (String word : slangWords.keySet()) {
-            if (Pattern.compile(Pattern.quote(definition), Pattern.CASE_INSENSITIVE).matcher(slangWords.get(word)).find()) {
+            if (Pattern.compile(Pattern.quote(definition),
+                 Pattern.CASE_INSENSITIVE).matcher(slangWords.get(word)).find()) {
                 result.add(word, slangWords.get(word));
             }
         }
         return result;
+    }
+
+    public String randomWord() {
+        int randomIndex = (int) (Math.random() * size);
+        int i = 0;
+        for (String word : slangWords.keySet()) {
+            if (i == randomIndex) {
+                return word;
+            }
+            i++;
+        }
+        return slangWords.keySet().iterator().next();
     }
 
     public String toString() {
@@ -53,5 +66,9 @@ public class SlangWordList {
             result += word + ": " + slangWords.get(word) + "\n";
         }
         return result;
+    }
+
+    public String getDefinition(String word) {
+        return slangWords.get(word);
     }
 }
