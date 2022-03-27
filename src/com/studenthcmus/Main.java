@@ -78,6 +78,8 @@ class SlangWordApp{
             System.out.println("5. Edit slang word");
             System.out.println("6. Delete slang word");
             System.out.println("7. Restore backup");
+            System.out.println("8. On this day slang word");
+            System.out.println("9. Random game: guess the definition");
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
             }
@@ -125,6 +127,11 @@ class SlangWordApp{
                         clearScreen();
                         RestoreBackup();
                         break;
+                    case 8:
+                        clearScreen();
+                        RandomWord();
+                        break;
+                
                     case 0:
                         clearScreen();
                         System.out.println("Thank you for using Slang Word List Application!");
@@ -139,6 +146,21 @@ class SlangWordApp{
         } while (id<0||id>5);
     }
 
+    private void RandomWord() {
+        String word = slangWordList.randomWord();
+        System.out.println("Slang word: " + word +", definition: " + slangWordList.getDefinition(word));
+        
+        System.out.println("Press enter to continue...");
+        BufferedReader bReader;
+        try {
+            bReader = new BufferedReader(new InputStreamReader(System.in, "utf-8"));
+            bReader.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        run();
+    }
     private void RestoreBackup() {
         System.out.println("Are you sure you want to restore backup? (Y/N)");
         BufferedReader bReader;
