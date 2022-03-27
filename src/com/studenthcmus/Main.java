@@ -80,6 +80,8 @@ class SlangWordApp{
             System.out.println("7. Restore backup");
             System.out.println("8. On this day slang word");
             System.out.println("9. Random game: guess the definition");
+            System.out.println("10. Random game: guess the slang word");
+            System.out.println("0. Exit");
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
             }
@@ -135,6 +137,10 @@ class SlangWordApp{
                         clearScreen();
                         GuessDefinition();
                         break;
+                    case 10:
+                        clearScreen();
+                        GuessSlangWord();
+                        break;
                     case 0:
                         clearScreen();
                         System.out.println("Thank you for using Slang Word List Application!");
@@ -149,6 +155,30 @@ class SlangWordApp{
         } while (id<0||id>5);
     }
 
+    private void GuessSlangWord() {
+        String word = slangWordList.randomWord();
+        String definition = slangWordList.getDefinition(word);
+        String[] words = new String[4];
+        for(int i=0;i<4;i++){
+            words[i] = slangWordList.randomWord();
+        }
+        int random = (int)(Math.random()*4);
+        words[random] = word;
+        System.out.println("Guess the slang word of: " + definition);
+        RandomGame game = new RandomGame (definition, words,random);
+        game.run();
+        System.out.println("Press enter to continue...");
+        BufferedReader bReader;
+        try {
+            bReader = new BufferedReader(new InputStreamReader(System.in, "utf-8"));
+            bReader.readLine();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        run();
+
+    }
     private void GuessDefinition() {
         String word = slangWordList.randomWord();
         String[] difination= {"","","",""};
