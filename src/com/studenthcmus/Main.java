@@ -156,11 +156,22 @@ class SlangWordApp{
         String word = slangWordList.randomWord();
         String definition = slangWordList.getDefinition(word);
         String[] words = new String[4];
-        for(int i=0;i<4;i++){
-            words[i] = slangWordList.randomWord();
-        }
         int random = (int)(Math.random()*4);
-        words[random] = word;
+        for(int i=0;i<4;i++){
+            if(i==random){
+                words[i] = word;
+            }
+            else{
+                words[i] = slangWordList.randomWord();
+                for(int j=0;j<i;j++){
+                    if(words[i].equals(words[j])||words[i].equals(word)){
+                        i--;
+                        break;
+                    }
+            }
+            }
+        }
+        
         System.out.println("Guess the slang word of: " + definition);
         RandomGame game = new RandomGame (definition, words,random);
         game.run();
@@ -179,11 +190,24 @@ class SlangWordApp{
     private void GuessDefinition() {
         String word = slangWordList.randomWord();
         String[] difination= {"","","",""};
-        for(int i=0;i<4;i++){
-            difination[i]=slangWordList.randomDefinition();
-        }
         int randomIndex = (int) (Math.random() * 4);
-        difination[randomIndex] = slangWordList.getDefinition(word);
+        for(int i=0;i<4;i++){
+            if(i==randomIndex){
+                difination[i] = slangWordList.getDefinition(word);
+                
+            }
+            else{
+                difination[i]=slangWordList.randomDefinition();
+                for(int j=0;j<i;j++){
+                    if(difination[i].equals(difination[j])|| 
+                    difination[i].equals(slangWordList.getDefinition(word))){
+                        i--;
+                        break;
+                    }
+                }
+            }
+            
+        }
         RandomGame game = new RandomGame(word, difination, randomIndex);
         System.out.println("Guess the definition of: "+word);
         game.run();
