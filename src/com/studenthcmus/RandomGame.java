@@ -47,13 +47,16 @@ public class RandomGame {
         return this.userAnswer;
     }
 
-    public void printResult() {
+    public boolean printResult() {
         if (this.userAnswer == -1) {
             System.out.println("You haven't answered yet!");
+            return false;
         } else if (this.userAnswer == this.correctAnswer) {
-            System.out.println("Correct Answer!");
+            System.out.println("=====>Correct Answer!");
+            return true;
         } else {
-            System.out.println("Wrong Answer!");
+            System.out.println("=====>Wrong Answer!");
+            return false;
         }
     }
     public void display() {
@@ -85,9 +88,10 @@ public class RandomGame {
         } catch (Exception e) {
            
         }
-        printResult();
-        System.out.println("The correct answer is: " + this.answers[this.correctAnswer]);
+       
+        if(! printResult()){System.out.println("*The correct answer is: " + this.answers[this.correctAnswer]);
     }
+}
 
 
     private boolean isNumeric(String readLine) {

@@ -70,18 +70,14 @@ class SlangWordApp{
         int id =0 ;
         do {
             clearScreen();
-            System.out.println("Welcome to Slang Word List Application");
-            System.out.println("1. Search by slang word");
-            System.out.println("2. Search by definition");
-            System.out.println("3. View search history");
-            System.out.println("4. Add new slang word");
-            System.out.println("5. Edit slang word");
-            System.out.println("6. Delete slang word");
-            System.out.println("7. Restore backup");
-            System.out.println("8. On this day slang word");
-            System.out.println("9. Random game: guess the definition");
-            System.out.println("10. Random game: guess the slang word");
+            System.out.println("\t---Welcome to Slang Word List Application---");
+            System.out.println("1. Search by slang word\t\t\t6. Delete slang word");
+            System.out.println("2. Search by definition\t\t\t7. Restore backup");
+            System.out.println("3. View search history\t\t\t8. On this day slang word");
+            System.out.println("4. Add new slang word\t\t\t9. Random game: guess the definition");
+            System.out.println("5. Edit slang word\t\t\t10. Random game: guess the slang word");
             System.out.println("0. Exit");
+            System.out.println("\t---------------------------------------------");
             if(id<0||id>10) {
                 System.out.print("Invalid choice! Please enter your choice again: ");
             }
@@ -142,9 +138,10 @@ class SlangWordApp{
                         GuessSlangWord();
                         break;
                     case 0:
-                        clearScreen();
+                        clearScreen();                        
                         System.out.println("Thank you for using Slang Word List Application!");
-                        break;
+                        saveData("slang.txt");
+                        System.exit(0);
                     default:
                         break;
                 }
