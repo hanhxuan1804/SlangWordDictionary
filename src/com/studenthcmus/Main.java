@@ -194,7 +194,6 @@ class SlangWordApp{
         for(int i=0;i<4;i++){
             if(i==randomIndex){
                 difination[i] = slangWordList.getDefinition(word);
-                
             }
             else{
                 difination[i]=slangWordList.randomDefinition();
@@ -247,6 +246,7 @@ class SlangWordApp{
             if(choice.equals("Y")||choice.equals("y")) {
                 slangWordList.slangWords.clear();
                 loadData("slang.txt.bak");
+                slangWordList.size = slangWordList.slangWords.size();
                 System.out.println("Backup restored!");
 
             }
